@@ -1,34 +1,35 @@
-FT					= ft
-STD					= std
-CXX					= c++
-CXXFLAGS			= -Wall -Werror -Wextra -std=c++98
-RM					= rm -rf
+# Variables
 
-OBJS_DIR		= 
+NAME		=	Containers
+CC			=	c++
+CFLAGS	=	-Werror -Wall -Wextra -std=c++98
+SRCS		=	src/main.cpp
+OBJ			=	$(SRCS:.c=.o)
 
-FT_SRCS			= src/ft.cpp
-STD_SRCS		= src/std.cpp
-FT_OBJS			= $(addprefix $(OBJS_DIR), $(FT_SRCS:.cpp=.o))
-STD_OBJS		= $(addprefix $(OBJS_DIR), $(STD_SRCS:.cpp=.o))
+# Rules
 
-all : $(FT) $(STD)
+all: $(NAME)
 
-$(FT) : $(FT_OBJS)
-	$(CXX) -o $(FT) $(FT_OBJS)
+$(NAME):	$(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "Compiling $(NAME) done"
 
-$(STD) : $(STD_OBJS)
-	$(CXX) -o $(STD) $(STD_OBJS)
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ $<
 
-$(OBJS_DIR)%.o : %.cpp
-	@mkdir -p $(OBJS_DIR)
-	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
+clean:
+	@rm -rf *.o
 
-clean :
-	$(RM) $(OBJS_DIR)
+fclean: clean
+	@rm -rf $(NAME)
+	@echo "! Removed $(NAME)"
 
-fclean : clean
-	$(RM) $(FT) $(STD)
+test: $(NAME)
+	./$(NAME)
 
-re : clean all
+vtest: $(NAME)
+	valgrind ./$(NAME)
 
-.PHONY : all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re test vtest
