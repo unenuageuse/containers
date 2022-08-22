@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_HPP_
-# define ALGORITHM_HPP_
+#ifndef ALGORITHM_HPP
+# define ALGORITHM_HPP
 
 namespace ft {
 	template <class InputIterator1, class InputIterator2>
