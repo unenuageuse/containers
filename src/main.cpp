@@ -46,46 +46,53 @@ struct Buffer
 int main(int argc, char** argv) {
 	std::cout << "* Vector *" << std::endl;
   ft::vector<int> vec;
-  std::cout << vec.empty();
+  std::cout << "Empty : " << vec.empty() << std::endl;
+  std::cout << "Push back : ";
   for (int i = 0; i < 5; i++)
     vec.push_back(i * 10);
   for (ft::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
     std::cout << *it << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
+  std::cout << "Reverse iterator : ";
   for (ft::vector<int>::reverse_iterator rit = vec.rbegin(); rit != vec.rend(); rit++)
     std::cout << *rit << " ";
-  std::cout << "\n";
-  std::cout << vec.size() << "\n";
+  std::cout << std::endl;
+  std::cout << "Size : ";
+  std::cout << vec.size() << std::endl;
+  std::cout << "Resize : ";
   vec.resize(10, 42);
-  std::cout << "\n";
   for (size_t i = 0; i < vec.size(); i++)
     std::cout << vec[i] << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
+  std::cout << "Pop back : ";
   vec.pop_back();
   for (size_t i = 0; i < vec.size(); i++)
     std::cout << vec.at(i) << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
   vec.reserve(20);
-  std::cout << vec.capacity() << "\n";
-  std::cout << vec.front() << "\n";
-  std::cout << vec.back() << "\n";
+  std::cout << "Capacity : " << vec.capacity() << std::endl;
+  std::cout << "Front : " << vec.front() << std::endl;
+  std::cout << "Back : " << vec.back() << std::endl;
+  std::cout << "Insert : ";
   vec.insert(vec.begin() + 1, 3, 999);
   for (size_t i = 0; i < vec.size(); i++)
     std::cout << vec[i] << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
+  std::cout << "Erase : ";
   vec.erase(vec.end() - 5);
   for (size_t i = 0; i < vec.size(); i++)
     std::cout << vec[i] << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
+  std::cout << "Assign : ";
   vec.assign(5, 10);
   for (size_t i = 0; i < vec.size(); i++)
     std::cout << vec[i] << " ";
-  std::cout << "\n";
+  std::cout << std::endl;
+  std::cout << "Copy vec : ";
   ft::vector<int> copy_vec = vec;
   for (size_t i = 0; i < copy_vec.size(); i++)
     std::cout << copy_vec[i] << " ";
-  std::cout << "\n";
-  std::cout << (vec == copy_vec) << " " << (vec != copy_vec) << "\n";
+  std::cout << std::endl;
 
 	// ! delete this
 	(void)argv;

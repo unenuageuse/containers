@@ -1,5 +1,5 @@
-#ifndef TYPE_TRAITS_HPP_
-# define TYPE_TRAITS_HPP_
+#ifndef TYPE_TRAITS_HPP
+# define TYPE_TRAITS_HPP
 
 namespace ft {
 	template <class T, T v>

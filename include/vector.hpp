@@ -8,16 +8,16 @@
 
 namespace ft
 {
-	template <class T, class Alloc = std::allocator<T>>
+	template <class T, class Alloc = std::allocator<T> >
 	class vector
 	{
 	public:
 		typedef T value_type;
 		typedef Alloc allocator_type;
-		typedef typename allocator_type::reference reference;							// T&
-		typedef typename allocator_type::const_reference const_reference; // const T&
-		typedef typename allocator_type::pointer pointer;									// T*
-		typedef typename allocator_type::const_pointer const_pointer;			// const T*
+		typedef typename allocator_type::reference reference;														// T&
+		typedef typename allocator_type::const_reference const_reference; 							// const T&
+		typedef typename allocator_type::pointer pointer;																// T*
+		typedef typename allocator_type::const_pointer const_pointer;										// const T*
 		typedef ft::random_access_iterator<value_type> iterator;
 		typedef ft::random_access_iterator<const value_type> const_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
@@ -29,7 +29,6 @@ namespace ft
 		pointer _ptr;
 		size_type _capacity;
 		size_type _size;
-
 	public:
 		explicit vector(const allocator_type &alloc = allocator_type())
 				: _alloc(alloc), _ptr(NULL), _capacity(0), _size(0) {}
@@ -111,7 +110,8 @@ namespace ft
 		{
 			return (_alloc.max_size());
 		}
-		void resize(size_type n, value_type val = value_type())
+		void resize(size_type n, value_type val = value_type()) 
+		//Resize the vector with the second parameters for fill if necessary
 		{
 			if (n > _capacity)
 				reserve(n);
@@ -137,6 +137,7 @@ namespace ft
 			return (size() == 0 ? true : false);
 		}
 		void reserve(size_type n)
+		// Change the capacity of the vector
 		{
 			if (n > max_size())
 			{
@@ -183,18 +184,22 @@ namespace ft
 			}
 		}
 		reference front()
+		// Return front
 		{
 			return (*begin());
 		}
 		const_reference front() const
+		// Return const front
 		{
 			return (*begin());
 		}
 		reference back()
+		// Return back
 		{
 			return (*(end() - 1));
 		}
 		const_reference back() const
+		// Return const back
 		{
 			return (*(end() - 1));
 		}
@@ -216,6 +221,7 @@ namespace ft
 				push_back(*first);
 		}
 		void assign(size_type n, const value_type &val)
+		// Assign first parameter as size of second parameters
 		{
 			clear();
 			if (n == 0)
@@ -230,6 +236,7 @@ namespace ft
 				push_back(val);
 		}
 		void push_back(const value_type &val)
+		// Add the element at the back of vector
 		{
 			if (_size == _capacity)
 				empty() ? reserve(1) : reserve(_size * 2);
@@ -237,6 +244,7 @@ namespace ft
 			_size++;
 		}
 		void pop_back()
+		// Delete the last element of vector
 		{
 			if (_size > 0)
 			{
@@ -245,6 +253,7 @@ namespace ft
 			}
 		}
 		iterator insert(iterator position, const value_type &val)
+		// Insert at the position the value
 		{
 			size_type idx = position - begin();
 			reserve(_size + 1);
@@ -255,6 +264,7 @@ namespace ft
 			return (position);
 		}
 		void insert(iterator position, size_type n, const value_type &val)
+		// Insert at the position until n the value
 		{
 			size_type idx = position - begin();
 			reserve(_size + n);
@@ -331,6 +341,7 @@ namespace ft
 			x._size = tmp_size;
 		}
 		void clear()
+		// Delete the vector if the size is more than 0
 		{
 			if (_size > 0)
 			{
@@ -343,7 +354,6 @@ namespace ft
 		{
 			return (Alloc(_alloc));
 		}
-
 	private:
 		void move_backward(iterator position, size_type n = 1)
 		{
@@ -383,7 +393,6 @@ namespace ft
 	{
 		return (!(lhs < rhs));
 	}
-
 	template <class T, class Alloc>
 	void swap(vector<T, Alloc> &x, vector<T, Alloc> &y)
 	{
