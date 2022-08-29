@@ -8,43 +8,44 @@
 
 namespace ft
 {
-	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T>> >
+	template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T> > >
 	class map
 	{
 		public:
-			Key							 																key_type;
-			T																								mapped_type;
-			std::pair<const Key, T>													value_type;
-			Compare																					key_compare;
+			typedef Key							 																				key_type;
+			typedef T																												mapped_type;
+			typedef std::pair<const Key, T>																	value_type;
+			typedef Compare																									key_compare;
 			// value_compare
-			Allocator																				allocator_type;
-			value_type&																			reference;
-			const value_type&																const_reference;
-			allocator_type::pointer													pointer;
-			allocator_type::const_pointer										const_pointer;
-			//iterator
-			//const iterator
-			std::reverse_iterator<iterator>									reverse_iterator;
-			std::reverse_iterator<const_iterator>						const_reverse_iterator;
-			ft::iterator_traits<iterator>::difference_type	difference_type;					// ptrdiff_t
-			allocator_type::size_type												size_type;								// size_t
+			typedef Allocator																								allocator_type;
+			typedef typename allocator_type::reference 											reference;
+			typedef typename allocator_type::const_reference								const_reference; 
+			typedef typename allocator_type::pointer												pointer;
+			typedef typename allocator_type::const_pointer									const_pointer;
+			typedef ft::random_access_iterator<value_type>									iterator;
+			typedef ft::random_access_iterator<const value_type>						const_iterator;
+			typedef ft::reverse_iterator<iterator>													reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>										const_reverse_iterator;
+			typedef typename ft::iterator_traits<iterator>::difference_type	difference_type;					// ptrdiff_t
+			typedef typename allocator_type::size_type											size_type;								// size_t
 		private:
 			allocator_type	_alloc;
-			pointer					_pointer;
+			Compare					_comp;
+			pointer					_ptr;
 			size_type				_capacity;
 			size_type				_size;
 		public:
 			explicit map (const key_compare& comp = key_compare(),
 			const allocator_type& alloc = allocator_type())
 			// Constructs an empty container, with no elements.
-				: _alloc(alloc), _ptr(NULL), _capacity(0), _size(0) {}
-			tremplate <class InputIterator>
+				: _alloc(alloc), _comp(comp), _ptr(NULL), _capacity(0), _size(0) {}
+			template <class InputIterator>
 			map (InputIterator first, InputIterator last,
 			const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type());
+			const allocator_type& alloc = allocator_type())
 			// Constructs a container with as many elements as the range [first,last),
 			// with each element constructed from its corresponding element in that range.
-				: _alloc(alloc), _size(0)
+				: _alloc(alloc), _comp(comp), _size(0)
 			{
 				difference_type n = last - first;
 				_ptr = _alloc.allocate(n);
@@ -62,7 +63,7 @@ namespace ft
 			// This destroys all container elements, and deallocates all the 
 			// storage capacity allocated by the map container using its allocator.
 			{
-				clear();
+				// clear();
 				if (_capacity > 0)
 					_alloc.deallocate(_ptr, _capacity);
 			}
@@ -72,6 +73,37 @@ namespace ft
 			// The container preserves its current allocator,
 			// which is used to allocate additional storage if needed.
 			{
+				if (this != &x)
+				{
+					// clear();
+					if (x.begin() > _capacity)
+					{
+						// if (x.begin > max_size())
+						// 	throw(std::length_error("ft::vector::reserve"));
+						// else if (x.begin() > _capacity)
+						// {
+						// 	pointer new_ptr = _alloc.allocate(x.begin());
+						// 	for (size_type i = 0; i < _size; i++)
+						// 		_alloc.construct(new_ptr + i, *(_ptr + i));
+						// 	_alloc.deallocate(_ptr, _capacity);
+						// 	_ptr = new_ptr;
+						// 	_capacity = x.begin();
+						// }		
+					}
+					if (x.begin() >= _size)
+					{
+						for (size_type i = _size; i < x.begin(); i++)
+							_alloc.construct(_ptr + i, x.end());
+					}
+					else
+					{
+						for (size_type i = x.begin(); i < _size; i++)
+							_alloc.destroy(_ptr + i);
+						_capacity = x.begin();
+					}
+					_size = x.begin();
+				}
+				return (*this);
 			}
 	};
 }

@@ -4,15 +4,15 @@
 #include <stdlib.h>
 
 // ? Here for the std
-// // #include <map>
-// // #include <stack>
-// #include <vector>
 // namespace ft = std;
+// #include <vector>
+// #include <map>
+// // #include <stack>
 
 // ? Here for the ft (my own)
-// #include "../include/map.hpp"
-// #include "../include/stack.hpp"
 #include "../include/vector.hpp"
+#include "../include/map.hpp"
+// #include "../include/stack.hpp"
 
 #define MAX_RAM 4294967296
 #define BUFFER_SIZE 4096
@@ -92,7 +92,10 @@ int main(int argc, char** argv) {
   ft::vector<int> copy_vec = vec;
   for (size_t i = 0; i < copy_vec.size(); i++)
     std::cout << copy_vec[i] << " ";
-  std::cout << std::endl;
+  std::cout << std::endl << std::endl;
+
+	std::cout << "* Map *" << std::endl;
+	ft::map<char, int> first;
 
 	// ! delete this
 	(void)argv;

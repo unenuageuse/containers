@@ -2,7 +2,8 @@
 
 NAME		=	Containers
 CC			=	c++
-CFLAGS	=	-Werror -Wall -Wextra -std=c++98
+CFLAGS	=	
+#-Werror -Wall -Wextra -std=c++98
 SRCS		=	src/main.cpp
 OBJ			=	$(SRCS:.c=.o)
 
