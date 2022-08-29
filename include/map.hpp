@@ -29,9 +29,24 @@ namespace ft
 			ft::iterator_traits<iterator>::difference_type	difference_type;					// ptrdiff_t
 			allocator_type::size_type												size_type;								// size_t
 		public:
-			map()
+			explicit map (const key_compare& comp = key_compare(),
+				const allocator_type& alloc = allocator_type())
 			{
-
+			}
+			tremplate <class InputIterator>
+			map (InputIterator first, InputIterator last,
+				const key_compare& comp = key_compare(),
+				const allocator_type& alloc = allocator_type());
+			{
+			}
+			map (const map& x)
+			{
+			}
+			~map ()
+			{
+			}
+			map& operator= (const map& x)
+			{
 			}
 	};
 }
