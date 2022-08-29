@@ -31,21 +31,31 @@ namespace ft
 		public:
 			explicit map (const key_compare& comp = key_compare(),
 				const allocator_type& alloc = allocator_type())
+			// Constructs an empty container, with no elements.
 			{
 			}
 			tremplate <class InputIterator>
 			map (InputIterator first, InputIterator last,
 				const key_compare& comp = key_compare(),
 				const allocator_type& alloc = allocator_type());
+			// Constructs a container with as many elements as the range [first,last),
+			// with each element constructed from its corresponding element in that range.
 			{
 			}
 			map (const map& x)
+			// Constructs a container with a copy of each of the elements in x.
 			{
 			}
 			~map ()
+			// This destroys all container elements, and deallocates all the 
+			// storage capacity allocated by the map container using its allocator.
 			{
 			}
 			map& operator= (const map& x)
+			// Copies all the elements from x into the container,
+			// changing its size accordingly.
+			// The container preserves its current allocator,
+			// which is used to allocate additional storage if needed.
 			{
 			}
 	};

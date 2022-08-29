@@ -2,7 +2,7 @@
 
 ## Map
 - [ ] (constructor)	Construct map (public member function)
-- [ ] destructor)	Map destructor (public member function)
+- [ ] (destructor)	Map destructor (public member function)
 - [ ]  operator=	Copy container
 
 - [ ]  begin	Return iterator to beginning (public member function)
